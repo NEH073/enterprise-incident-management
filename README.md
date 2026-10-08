@@ -2,7 +2,21 @@
 
 A full-stack incident management application designed to help teams create, track, update, assign, and manage enterprise incidents through a role-based web application.
 
-The system provides secure user authentication, incident lifecycle management, admin controls, REST APIs, PostgreSQL persistence, containerized deployment with Docker, and automated backend testing through GitHub Actions.
+The system provides secure user authentication, incident lifecycle management, admin controls, REST APIs, PostgreSQL persistence, Docker-based deployment, automated testing, and CI validation through GitHub Actions.
+
+## 📸 Application Screenshots
+
+### 🔐 Login & Authentication
+
+![Login](screenshots/login.png)
+
+### 📊 Incident Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### 📝 Create Incident
+
+![Create Incident](screenshots/create-incident.png)
 
 ## 🚀 Key Features
 
@@ -21,33 +35,29 @@ The system provides secure user authentication, incident lifecycle management, a
 
 ## 🏗️ Architecture
 
+```text
+                ┌─────────────────────┐
+                │    React Frontend   │
+                │      Port: 5173     │
+                └──────────┬──────────┘
+                           │
+                     HTTP / REST API
+                           │
+                           ▼
+                ┌─────────────────────┐
+                │   FastAPI Backend   │
+                │      Port: 8000     │
+                └──────────┬──────────┘
+                           │
+                     SQLAlchemy ORM
+                           │
+                           ▼
+                ┌─────────────────────┐
+                │    PostgreSQL DB    │
+                │      Port: 5432     │
+                └─────────────────────┘
 
-                    ┌─────────────────────┐
-                    │    React Frontend   │
-                    │      Port: 5173     │
-                    └──────────┬──────────┘
-                               │
-                         HTTP / REST API
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   FastAPI Backend   │
-                    │      Port: 8000     │
-                    └──────────┬──────────┘
-                               │
-                         SQLAlchemy ORM
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │    PostgreSQL DB    │
-                    │      Port: 5432     │
-                    └─────────────────────┘
-
-              Docker Compose
-                    │
-        ┌───────────┼───────────┐
-        ▼           ▼           ▼
-     Frontend    Backend     PostgreSQL
+                    Docker Compose
 ```
 
 ### Application Flow
@@ -102,8 +112,6 @@ Protected API endpoints require a valid access token, while admin-only operation
 
 ### Prerequisites
 
-Make sure you have:
-
 * Docker Desktop
 * Git
 
@@ -128,19 +136,19 @@ This starts three services:
 
 ### 3. Access the application
 
-Frontend:
+**Frontend**
 
 ```text
 http://localhost:5173
 ```
 
-Backend API:
+**Backend API**
 
 ```text
 http://localhost:8000
 ```
 
-FastAPI Swagger documentation:
+**FastAPI Swagger documentation**
 
 ```text
 http://localhost:8000/docs
@@ -152,11 +160,8 @@ http://localhost:8000/docs
 docker compose down
 ```
 
-To stop the containers while keeping the PostgreSQL data volume:
+To stop the containers while keeping the PostgreSQL data volume, use the same command because the database volume is managed separately by Docker Compose.
 
-```bash
-docker compose down
-```
 ## 🧪 Testing
 
 The backend includes automated API tests using **Pytest**.
@@ -228,7 +233,7 @@ This helps ensure that backend changes are automatically validated before being 
 
 ### API Documentation
 
-FastAPI automatically generates interactive API documentation:
+FastAPI automatically generates interactive API documentation at:
 
 ```text
 http://localhost:8000/docs
@@ -248,7 +253,7 @@ You can use Swagger UI to test the available REST endpoints directly from the br
 
 ## 📌 Project Status
 
-The application is currently functional with authentication, role-based access control, incident management, Docker-based deployment, automated testing, and CI validation.
+The application is functional with authentication, role-based access control, incident management, Docker-based deployment, automated testing, and CI validation.
 
 ## 📄 License
 
